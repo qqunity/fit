@@ -8,11 +8,14 @@ import java.util.function.Function;
 @RunWith(JUnitQuickcheck.class)
 public class TerminalObjectPropertyTest {
 
-    // Функция из Integer в Void
     public static Function<Integer, Void> intToVoid = x -> null;
 
-    // Функция из String в Void
     public static Function<String, Void> stringToVoid = x -> null;
+
+    @Property
+    public <T> void testFunctionWithGenericParameter(T input, Function<T, Void> function) {
+        assert function.apply(input) == null;
+    }
 
     @Property
     public void testWithInteger(Integer x) {
